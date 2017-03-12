@@ -134,10 +134,8 @@ public class MainActivity extends AppCompatActivity {
                     isdowns = false;
                 }
             }, 2000);
-
             return true;
         }
-
 
         return super.onKeyDown(keyCode, event);
 
