@@ -1,5 +1,6 @@
 package com.mancy.p2ptext;
 
+
 import android.app.Activity;
 
 import java.util.Stack;
@@ -10,14 +11,13 @@ import java.util.Stack;
 
 public class AppManager {
 
-    private AppManager() {
-    }
 
-    ;
+    private AppManager(){}
+
 
     private static AppManager appManager = new AppManager();
 
-    private static AppManager getInstance() {
+    public static AppManager getInstance() {
         return appManager;
     }
 

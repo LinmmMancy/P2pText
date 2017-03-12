@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.mancy.p2ptext.AppManager;
 import com.mancy.p2ptext.R;
 import com.mancy.p2ptext.fragment.HomeFragment;
 import com.mancy.p2ptext.fragment.InvestFragment;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.inject(this);
 
         initData();
+
+        AppManager.getInstance().addActivity(this);
 
         mainRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

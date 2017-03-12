@@ -23,6 +23,9 @@ public class MyAppcation extends Application {
         context = this;
 
         CrashHandler.getInstance().init();
+
+        //初始化未捕获异常 上线的时候才打开
+        //CrashHandler.getInstance().init();
     }
 
     public static Context getContext() {

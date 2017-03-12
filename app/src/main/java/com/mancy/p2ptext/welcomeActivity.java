@@ -32,6 +32,8 @@ public class welcomeActivity extends AppCompatActivity {
         ButterKnife.inject(this);
 
         initData();
+        AppManager.getInstance().addActivity(this);
+
     }
 
     private void initData() {
