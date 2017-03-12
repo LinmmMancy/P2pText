@@ -21,6 +21,8 @@ public class MyAppcation extends Application {
     public void onCreate() {
         super.onCreate();
         context = this;
+
+        CrashHandler.getInstance().init();
     }
 
     public static Context getContext() {
