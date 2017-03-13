@@ -16,7 +16,7 @@ public class ThreadPool {
 
     private static ThreadPool threadPool = new ThreadPool();
 
-    public static ThreadPool getThreadPool() {
+    public static ThreadPool getInstance() {
         return threadPool;
     }
 

@@ -2,6 +2,7 @@ package com.mancy.p2ptext.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -44,6 +45,9 @@ public class HomeFragment extends Fragment {
     @InjectView(R.id.banner)
     Banner banner;
 
+    @InjectView(R.id.home_progress)
+    MyProgress homeProgress;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -80,8 +84,8 @@ public class HomeFragment extends Fragment {
 
                 tvHomeProduct.setText(homeBean.getProInfo().getName());
 
-                tvHomeYearrate.setText(Double.parseDouble(homeBean.getProInfo().getYearRate()) / 100 + "%");
-
+                tvHomeYearrate.setText(homeBean.getProInfo().getYearRate() + "%");
+                initProgress(homeBean.getProInfo());
                 initBanner(homeBean);
 
 
@@ -91,6 +95,23 @@ public class HomeFragment extends Fragment {
             @Override
             public void failure(String error) {
                 Log.i("http", "联网失败: " + error);
+            }
+        });
+    }
+
+    private void initProgress(final HomeBean.ProInfoBean proInfo) {
+        ThreadPool.getInstance().getGlobalThread().execute(new Runnable() {
+            @Override
+            public void run() {
+
+                int progess = Integer.parseInt(proInfo.getProgress());
+                for (int i = 0; i < progess; i++) {
+                    SystemClock.sleep(120);
+
+
+                    homeProgress.setprogress(i);
+
+                }
             }
         });
     }

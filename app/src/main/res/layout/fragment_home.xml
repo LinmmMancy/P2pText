@@ -69,8 +69,8 @@
                     android:background="@drawable/home_attribute_bg"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:textColor="@color/home_back_unselected"
-                    android:text="本息保障" />
+                    android:text="本息保障"
+                    android:textColor="@color/home_back_unselected" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -81,8 +81,8 @@
                     android:background="@drawable/home_attribute_bg"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:textColor="@color/home_back_unselected"
-                    android:text="每日计息" />
+                    android:text="每日计息"
+                    android:textColor="@color/home_back_unselected" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -91,32 +91,31 @@
                     android:background="@drawable/home_attribute_bg"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:textColor="@color/home_back_unselected"
-                    android:text="高额收益" />
+                    android:text="高额收益"
+                    android:textColor="@color/home_back_unselected" />
 
 
             </LinearLayout>
 
 
-            <!--<com.atguigu.p2pinvest0828.ui.RoundProgress-->
+            <!--<com.mancy.p2ptext.fragment.MyProgress-->
             <!--android:id="@+id/roundPro_home"-->
             <!--android:layout_width="120dp"-->
             <!--android:layout_height="120dp"-->
             <!--android:layout_marginTop="10dp"-->
-            <!--atguigu:roundColor="@color/more_text"-->
-            <!--atguigu:roundProgressColor="@color/round_red_common"-->
-            <!--atguigu:textColor="@color/title_back"-->
-            <!--atguigu:textSize="20dp"-->
-            <!--atguigu:roundWith="10dp"-->
             <!--atguigu:max="100"-->
             <!--atguigu:progress="70"-->
-            <!--/>-->
-            <!--<com.p2pinvest1020.ui.MyProgress-->
-                <!--android:layout_width="120dp"-->
-                <!--android:layout_height="120dp"-->
-                <!--android:id="@+id/home_progress"-->
-                <!--atguigu:sweepArc="160">-->
-            <!--</com.p2pinvest1020.ui.MyProgress>-->
+            <!--atguigu:roundColor="@color/more_text"-->
+            <!--atguigu:roundProgressColor="@color/round_red_common"-->
+            <!--atguigu:roundWith="10dp"-->
+            <!--atguigu:textColor="@color/title_back"-->
+            <!--atguigu:textSize="20dp" />-->
+
+            <com.mancy.p2ptext.fragment.MyProgress
+                android:id="@+id/home_progress"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                atguigu:sweepArc="160"></com.mancy.p2ptext.fragment.MyProgress>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -146,26 +145,24 @@
 
 
             <Button
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/home"
                 android:text="立即加入"
-                android:textSize="30sp"
                 android:textColor="@color/white"
-                />
+                android:textSize="30sp" />
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="风险保障金由硅谷银行监管"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/home_back_unselected"
                 android:drawableLeft="@drawable/guarantee_icon"
-                />
+                android:text="风险保障金由硅谷银行监管"
+                android:textColor="@color/home_back_unselected" />
 
         </LinearLayout>
 
