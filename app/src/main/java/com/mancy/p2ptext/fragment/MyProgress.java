@@ -94,10 +94,10 @@ public class MyProgress extends View {
         paint.setColor(sweepColor);
 
         //第二个参数是起始角 第三个参数多少度
-        canvas.drawArc(rectf, 0, sweepAre, false, paint);
+        canvas.drawArc(rectf, 0, sweepAre * 360 / 100, false, paint);
 
         //画文字
-        String text = sweepAre * 100 / 360 + "%";
+        String text = sweepAre + "%";
         Rect rect = new Rect();
 
         // 第一个参数是文本   第二个参数是文字的截取长度，第三个是放测量的容器

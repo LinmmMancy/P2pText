@@ -1,14 +1,9 @@
 package com.mancy.p2ptext.fragment;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,7 +26,7 @@ import butterknife.InjectView;
 /**
  * Created by Mancy on 2017/3/10.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment {
     @InjectView(R.id.base_title)
     TextView baseTitle;
     @InjectView(R.id.base_back)
@@ -48,32 +43,20 @@ public class HomeFragment extends Fragment {
     @InjectView(R.id.home_progress)
     MyProgress homeProgress;
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = View.inflate(getActivity(), R.layout.fragment_home, null);
-        ButterKnife.inject(this, view);
-        return view;
 
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        //初始化数据
-        initData();
-        //初始化监听
-        initListener();
-    }
-
-    private void initListener() {
+    public void initListener() {
         baseTitle.setText("首页");
         // 隐藏 首页左右两边的图
         baseBack.setVisibility(View.INVISIBLE);
         baseSetting.setVisibility(View.INVISIBLE);
     }
 
-    private void initData() {
+    @Override
+    public int getlayoutid() {
+        return R.layout.fragment_home;
+    }
+
+    public void initData() {
 
         LoadNet.getDataPost(AppNetConfig.INDEX, new LoadNetHttp() {
             @Override
@@ -106,7 +89,7 @@ public class HomeFragment extends Fragment {
 
                 int progess = Integer.parseInt(proInfo.getProgress());
                 for (int i = 0; i < progess; i++) {
-                    SystemClock.sleep(120);
+                    SystemClock.sleep(20);
 
 
                     homeProgress.setprogress(i);
