@@ -1,4 +1,4 @@
-package com.mancy.p2ptext.fragment;
+package com.mancy.p2ptext.utils;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
