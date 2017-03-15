@@ -47,4 +47,13 @@ public class UiUtils {
     }
 
 
+    public static void runOnUiThread(Runnable runnable) {
+        //比较pid来判断是不是在主线程
+        if (MyAppcation.getThreadid() == android.os.Process.myPid()) {
+            runnable.run();
+        } else {
+            //给handler发送一个runnable
+            MyAppcation.getHandler().post(runnable);
+        }
+    }
 }

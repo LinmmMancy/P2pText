@@ -22,13 +22,12 @@ public class MyProgress extends View {
     private TypedArray typedArray;
     private int roundColor;   //  圆环的颜色
     private int sweepColor = Color.RED;
-    private int sweepAre = 60;
+    private int sweepArc ;
     private int measuredHeight;
     private int measuredWidth;
 
 
     private int roundWidth = 10;
-    private int progress;
 
     public MyProgress(Context context) {
         super(context);
@@ -48,7 +47,7 @@ public class MyProgress extends View {
 
         sweepColor = typedArray.getColor(R.styleable.progress_sweepColor, Color.RED);
 
-        sweepAre = typedArray.getInteger(R.styleable.progress_sweepArc, 0);
+        sweepArc = typedArray.getInteger(R.styleable.progress_sweepArc, 0);
 
         typedArray.recycle();
 
@@ -94,10 +93,11 @@ public class MyProgress extends View {
         paint.setColor(sweepColor);
 
         //第二个参数是起始角 第三个参数多少度
-        canvas.drawArc(rectf, 0, sweepAre * 360 / 100, false, paint);
+        canvas.drawArc(rectf, 0, sweepArc * 360 / 100, false, paint);
 
-        //画文字
-        String text = sweepAre + "%";
+        //画文字1-
+
+        String text = sweepArc + "%";
         Rect rect = new Rect();
 
         // 第一个参数是文本   第二个参数是文字的截取长度，第三个是放测量的容器
@@ -128,6 +128,11 @@ public class MyProgress extends View {
 
 
     public void setprogress(int progress) {
-        this.progress = progress;
+        sweepArc = progress;
+        /*
+        * invalidate 是在主线程强制刷新
+        * postinvalidate 是在分线程强制刷新
+        * */
+        postInvalidate();
     }
 }

@@ -8,11 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.mancy.p2ptext.LoadNetHttp;
 import com.mancy.p2ptext.R;
 import com.mancy.p2ptext.bean.HomeBean;
 import com.mancy.p2ptext.utils.AppNetConfig;
-import com.mancy.p2ptext.utils.LoadNet;
 import com.squareup.picasso.Picasso;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
@@ -56,31 +54,49 @@ public class HomeFragment extends BaseFragment {
         return R.layout.fragment_home;
     }
 
-    public void initData() {
-
-        LoadNet.getDataPost(AppNetConfig.INDEX, new LoadNetHttp() {
-            @Override
-            public void success(String context) {
-                Log.i("http", "联网成功: " + context);
-
-                HomeBean homeBean = JSON.parseObject(context, HomeBean.class);
-
-                tvHomeProduct.setText(homeBean.getProInfo().getName());
-
-                tvHomeYearrate.setText(homeBean.getProInfo().getYearRate() + "%");
-                initProgress(homeBean.getProInfo());
-                initBanner(homeBean);
-
-
-            }
-
-
-            @Override
-            public void failure(String error) {
-                Log.i("http", "联网失败: " + error);
-            }
-        });
+    @Override
+    protected String getChildUrl() {
+        return AppNetConfig.INDEX;
     }
+
+    @Override
+    protected void initData(String json) {
+        HomeBean homeBean = JSON.parseObject(json, HomeBean.class);
+        tvHomeYearrate.setText(homeBean.getProInfo().getYearRate());
+
+        tvHomeProduct.setText(homeBean.getProInfo().getName());
+
+        initProgress(homeBean.getProInfo());
+
+        initBanner(homeBean);
+
+    }
+
+//    public void initData() {
+//
+//        LoadNet.getDataPost(AppNetConfig.INDEX, new LoadNetHttp() {
+//            @Override
+//            public void success(String context) {
+//                Log.i("http", "联网成功: " + context);
+//
+//                HomeBean homeBean = JSON.parseObject(context, HomeBean.class);
+//
+//                tvHomeProduct.setText(homeBean.getProInfo().getName());
+//
+//                tvHomeYearrate.setText(homeBean.getProInfo().getYearRate() + "%");
+//                initProgress(homeBean.getProInfo());
+//                initBanner(homeBean);
+//
+//
+//            }
+//
+//
+//            @Override
+//            public void failure(String error) {
+//                Log.i("http", "联网失败: " + error);
+//            }
+//        });
+
 
     private void initProgress(final HomeBean.ProInfoBean proInfo) {
         ThreadPool.getInstance().getGlobalThread().execute(new Runnable() {
@@ -88,7 +104,7 @@ public class HomeFragment extends BaseFragment {
             public void run() {
 
                 int progess = Integer.parseInt(proInfo.getProgress());
-                for (int i = 0; i < progess; i++) {
+                for (int i = 0; i <= progess; i++) {
                     SystemClock.sleep(20);
 
 

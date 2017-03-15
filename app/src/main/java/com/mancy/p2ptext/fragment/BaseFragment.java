@@ -14,30 +14,55 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseFragment extends Fragment {
+
+    private LoadingPager loadingPager;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = View.inflate(getActivity(), getlayoutid(), null);
-        ButterKnife.inject(this, view);
-        return view;
+        loadingPager = new LoadingPager(getActivity()) {
 
+            @Override
+            protected void onSuccess(ResultState resultSTate, View sucessView) {
+                ButterKnife.inject(BaseFragment.this, sucessView);
+                initData(resultSTate.getJson());
+            }
+
+            @Override
+            protected String getUrl() {
+                return getChildUrl();
+            }
+
+            @Override
+            protected int getviewId() {
+                return getlayoutid();
+            }
+        };
+        return loadingPager;
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        initListener();
-
-        initData();
+//        initListener();
+//
+//        initData();
+        loadingPager.loadData();
 
     }
 
-    protected abstract void initData();
-
     protected abstract void initListener();
 
+
     public abstract int getlayoutid();
+
+
+    protected abstract String getChildUrl();
+
+
+    protected abstract void initData(String json);
 
 
     @Override

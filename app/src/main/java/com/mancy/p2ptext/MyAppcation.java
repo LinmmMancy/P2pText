@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Handler;
 
+
 /**
  * Created by Mancy on 2017/3/12.
  */
@@ -21,8 +22,10 @@ public class MyAppcation extends Application {
     public void onCreate() {
         super.onCreate();
         context = this;
+        threadid = android.os.Process.myPid();
+        handler = new Handler();
 
-        CrashHandler.getInstance().init();
+     //   CrashHandler.getInstance().init();
 
         //初始化未捕获异常 上线的时候才打开
         //CrashHandler.getInstance().init();
