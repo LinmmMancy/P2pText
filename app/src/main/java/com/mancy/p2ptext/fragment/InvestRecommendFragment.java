@@ -3,6 +3,7 @@ package com.mancy.p2ptext.fragment;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mancy.p2ptext.R;
 import com.mancy.p2ptext.UiUtils;
@@ -86,7 +87,7 @@ public class InvestRecommendFragment extends BaseFragment {
 
         @Override
         public View getView(int group, int position, View convertView) {
-            TextView tv = new TextView(getActivity());
+            final TextView tv = new TextView(getActivity());
 
             if (group == 0) {
                 tv.setText(onedatas[position]);
@@ -98,6 +99,13 @@ public class InvestRecommendFragment extends BaseFragment {
             int blue = random.nextInt(125);
 
             tv.setTextColor(Color.rgb(red, green, blue));
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getActivity(), tv.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                }
+            });
 
             return tv;
         }

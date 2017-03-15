@@ -1,9 +1,9 @@
 package com.mancy.p2ptext.activity;
 
-import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -19,10 +19,9 @@ import com.mancy.p2ptext.fragment.propertFragment;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @InjectView(R.id.main_fl)
     FrameLayout mainFl;
@@ -37,15 +36,16 @@ public class MainActivity extends AppCompatActivity {
     private propertFragment propertFragment;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
-
-        initData();
+    public void initData() {
 
         AppManager.getInstance().addActivity(this);
+
+        switchFragment(R.id.rb_main);
+
+    }
+
+    @Override
+    protected void initListener() {
 
         mainRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -56,10 +56,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void initData() {
-        switchFragment(R.id.rb_main);
+    @Override
+    protected void initTitle() {
+
+
 
     }
+
+    @Override
+    public int getLayouid() {
+        // 去掉窗口标题
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // 隐藏顶部的状态栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                return R.layout.activity_main;
+        }
 
     private void switchFragment(int checkedId) {
 

@@ -3,20 +3,21 @@ package com.mancy.p2ptext;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.mancy.p2ptext.activity.BaseActivity;
+import com.mancy.p2ptext.activity.LoginActivity;
 import com.mancy.p2ptext.activity.MainActivity;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class welcomeActivity extends AppCompatActivity {
+public class welcomeActivity extends BaseActivity {
 
     @InjectView(R.id.iv_welcome_icon)
     ImageView ivWelcomeIcon;
@@ -25,25 +26,32 @@ public class welcomeActivity extends AppCompatActivity {
     @InjectView(R.id.activity_splash)
     RelativeLayout activitySplash;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
-        ButterKnife.inject(this);
 
-        initData();
+    public void initData() {
+
+        // 设置动画
+
+        // 设置版本号
         AppManager.getInstance().addActivity(this);
+        setVersion();
+        setAnimation();
+
 
     }
 
-    private void initData() {
-        // 设置动画
-        setAnimation();
-        // 设置版本号
+    @Override
+    protected void initListener() {
 
-        setVersion();
+    }
 
+    @Override
+    protected void initTitle() {
 
+    }
+
+    @Override
+    public int getLayouid() {
+        return R.layout.activity_welcome;
     }
 
     private void setVersion() {
@@ -93,9 +101,16 @@ public class welcomeActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 // 动画完毕时 执行
-                startActivity(new Intent(welcomeActivity.this, MainActivity.class));
-                finish();
+                if (isLogin()) {
+                    startActivity(new Intent(welcomeActivity.this, MainActivity.class));
+                    Log.e("TAG", "onAnimationEnd: 11");
+                    finish();
+                } else {
+                    startActivity(new Intent(welcomeActivity.this, LoginActivity.class));
+                    finish();
+                }
             }
+
 
             @Override
             public void onAnimationRepeat(Animation animation) {
@@ -105,5 +120,14 @@ public class welcomeActivity extends AppCompatActivity {
 
         activitySplash.startAnimation(animation);
 
+    }
+
+    private boolean isLogin() {
+        String name = getUser().getData().getName();
+        if (TextUtils.isEmpty(name)) {
+            return false;
+        }
+
+        return true;
     }
 }
