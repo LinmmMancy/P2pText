@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mancy.p2ptext">
+
     <!-- 配置所需权限 -->
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -29,7 +30,6 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
-
     <application
         android:name=".MyAppcation"
         android:allowBackup="true"
@@ -46,8 +46,22 @@
         </activity>
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.RegesterActivity" />
-        <activity android:name=".activity.LoginActivity"></activity>
-
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".fragment.TouziActivity" />
+        <activity android:name=".fragment.PieActivity" />
+        <activity android:name=".fragment.ColumnActivity" />
+        <activity android:name=".fragment.ReChargeActivity" />
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
+        <activity android:name=".fragment.WithDrawActivity"></activity>
     </application>
 
 </manifest>

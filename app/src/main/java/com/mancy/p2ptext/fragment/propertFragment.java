@@ -1,6 +1,8 @@
 package com.mancy.p2ptext.fragment;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -44,6 +46,7 @@ public class propertFragment extends BaseFragment {
 
     @Override
     protected void initData(String json) {
+        initListener();
         MainActivity activity = (MainActivity) getActivity();
         UserInfo user = activity.getUser();
 
@@ -72,8 +75,44 @@ public class propertFragment extends BaseFragment {
 
     @Override
     protected void initListener() {
+        llTouzi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), TouziActivity.class));
+            }
+        });
+
+        llZichan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(getActivity(), PieActivity.class));
+
+            }
+        });
+        llTouziZhiguan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(getActivity(), ColumnActivity.class));
+
+            }
+        });
+        recharge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),ReChargeActivity.class));
+            }
+        });
+        withdraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),WithDrawActivity.class));
+            }
+        });
 
     }
+
 
     @Override
     public int getlayoutid() {
